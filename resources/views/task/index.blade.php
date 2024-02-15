@@ -34,6 +34,7 @@
                                             <th>Task</th>
                                             <th>Status</th>
                                             <th>Create Date</th>
+                                            <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -41,8 +42,18 @@
                                             <tr>
                                                 <td>{{ $task->id }}</td>
                                                 <td>{{ $task->task }}</td>
-                                                <td><span class="badge bg-primary text-white">{{ $task->status }}</span></td>
+                                                <td><span class="badge bg-primary text-white">{{ $task->status }}</span>
+                                                </td>
                                                 <td>{{ $task->created_at->format('d-m-Y') }}</td>
+                                                <td>
+                                                    <form action="{{ route('task.destroy', ['task' => $task->id]) }}"
+                                                        method="POST">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <button type="submit"
+                                                            class="btn btn-primary btn-sm">Delete</button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
